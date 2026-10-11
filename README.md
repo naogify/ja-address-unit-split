@@ -138,3 +138,14 @@ docs/       DESIGN-building-split.md（設計と測定の記録）
 ## ライセンス
 
 MIT（[LICENSE](LICENSE)）
+
+## `dist/` をコミットしている理由
+
+このパッケージは npm レジストリに出していない private リポジトリで、利用側は
+`npm install github:naogify/ja-address-unit-split#<SHA>` の形で git から直接入れる。
+git 依存の取得では `npm install` 時にビルドが走らないため、`package.json` の
+`main`（`./dist/index.js`）が存在しないと import できない。そこでビルド結果の
+`dist/` をリポジトリに含めている（同じ構成の `japanese-person-name-detector` /
+`japanese-person-name-dictionary` と同じ扱い）。
+
+`src/` を変えたら `npm run build` を実行し、`dist/` の差分も一緒にコミットすること。
